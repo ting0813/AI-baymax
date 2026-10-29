@@ -3,7 +3,7 @@
 AI Baymax Plushie 是一個開源的軟硬體改造專案，目標是將市售的 50cm–80cm 絨毛杯麵（Baymax）娃娃，改造成一個具備同理心、語音互動能力與本地邊緣運算能力的 AI 伴侶機器人。
 
 <p align="center">
-  <img src="https://github.com/ting0813/AI-plush-giraffe/blob/main/Gemini_Generated_Image_xbjvv3xbjvv3xbjv.jpg?raw=true" alt="AI Baymax Plushie" width="900" />
+  <img src="Baymax.jpg" alt="AI Baymax Plushie" width="900" />
 </p>
 
 本專案結合 Raspberry Pi、大型語言模型（LLM）、語音辨識與硬體互動模組，打造一個能聽、能說、能理解、並以溫暖方式回應的陪伴型智慧玩偶。
