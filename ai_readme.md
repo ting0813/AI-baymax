@@ -49,40 +49,38 @@ By using a hybrid edge + cloud architecture, the plush can respond quickly at th
 The project uses a hybrid architecture where edge devices handle immediate sensing and local control, while cloud AI handles complex reasoning and speech generation.
 
 ```mermaid
-flowchart TD
-    User((🧑 User))
-
-    subgraph Edge[🧸 Plush Toy Interior - Edge / Hardware]
-        Mic[🎙️ USB Microphone]
-        Wake[🔍 Wake Word Engine<br/>Porcupine / Snowboy]
-        RPi[🍓 Raspberry Pi 4B / Zero 2 W]
-        Speaker[🔊 Mini Speaker]
-        LED[💡 Breathing LED]
-        Heater[🔥 Low-Temperature Heating Pad]
-        Servo[🦾 Servo / Head Motion]
-    end
-
-    subgraph Cloud[☁️ Cloud AI Services]
-        STT[👂 Speech-to-Text<br/>Whisper API]
-        LLM[🧠 Empathetic LLM<br/>GPT-4o / Claude]
-        TTS[🗣️ Text-to-Speech<br/>OpenAI TTS / ElevenLabs]
-    end
-
-    User -->|Speech| Mic
-    Mic --> Wake
-    Wake -->|Wake triggered| RPi
-
-    Mic -->|Audio file| STT
-    STT -->|Text| LLM
-    LLM -->|Response text| TTS
-    TTS -->|Audio output| RPi
-
-    RPi --> Speaker
-    Speaker -->|Warm voice response| User
-
-    RPi -. Controls heater temperature .-> Heater
-    RPi -. Controls LED brightness / state .-> LED
-    RPi -. Controls nod / shake / wave .-> Servo
+SMART CUP NOODLES
+ ┌────────────────────────────────────────────┐
+ │                AMB82-Mini                  │
+ │                                            │
+ │ Camera ──> local vision ──> perception     │
+ │ Mic ─────> audio/event detection           │
+ │                                            │
+ │            Cup Noodles Agent API           │
+ │        HTTP/WebSocket JSON interface       │
+ │                    │                       │
+ │       ┌────────────┼────────────┐          │
+ │       ▼            ▼            ▼          │
+ │    Speaker       Servos        LEDs        │
+ │   / playback   head / ears   expression    │
+ └────────────────────┬───────────────────────┘
+                      │ Wi-Fi
+                      │
+              Android phone/tablet
+ ┌────────────────────▼───────────────────────┐
+ │          Google AI Edge Gallery            │
+ │                                            │
+ │        on-device model / agent             │
+ │                 │                          │
+ │       Cup Noodles Agent Skill              │
+ │                 │                          │
+ │        JS Skill / MCP ecosystem            │
+ │                 │                          │
+ │       ┌─────────┼─────────┐                │
+ │       ▼         ▼         ▼                │
+ │     look()    emotion()   move()           │
+ │     status()  play()      etc.             │
+ └────────────────────────────────────────────┘
 ```
 
 This architecture keeps the toy responsive, safe, and private on the edge, while offloading higher-level language understanding to cloud models.
