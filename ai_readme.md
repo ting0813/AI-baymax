@@ -48,7 +48,7 @@ By using a hybrid edge + cloud architecture, the plush can respond quickly at th
 
 The project uses a hybrid architecture where edge devices handle immediate sensing and local control, while cloud AI handles complex reasoning and speech generation.
 
-```mermaid
+```text
 SMART CUP NOODLES
  ┌────────────────────────────────────────────┐
  │                AMB82-Mini                  │
