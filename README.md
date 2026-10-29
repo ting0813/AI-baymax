@@ -102,7 +102,7 @@ SMART CUP NOODLES
 
 這個架構讓娃娃在邊緣端快速反應，同時將語意理解與自然對話交由雲端 AI 完成，整體效果更接近真實的互動型陪伴裝置。
 <p align="center">
-  <img src="Baymax.jpg" alt="assets/ai-baymax-architecture.png" width="900" />
+  <img src="assets/ai-baymax-architecture.png" alt="assets/ai-baymax-architecture.png" width="900" />
 </p>
 
 ---
