@@ -23,46 +23,43 @@
 本專案採用邊緣運算 (Edge) 與雲端 (Cloud) 混合架構。喚醒與基礎 I/O 由樹莓派處理，複雜的語意理解則交由雲端 API。
 
 ```mermaid
-graph TD
-    %% Define styles
-    classDef edge fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef cloud fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef hardware fill:#dfd,stroke:#333,stroke-width:2px;
-
-    %% Components
+flowchart TD
     User((🧑 使用者))
-    
-    subgraph 🧸 絨毛娃娃內部 (Edge / Hardware)
-        Mic[🎙️ USB 麥克風]:::hardware
-        Speaker[🔊 迷你擴音喇叭]:::hardware
-        Heater[🔥 低溫加熱墊]:::hardware
-        LED[💡 狀態指示燈]:::hardware
-        
-        RPi[🍓 Raspberry Pi 4B / Zero 2 W]:::edge
-        WakeWord[🔍 喚醒詞引擎 (Porcupine)]:::edge
+
+    subgraph Edge[🧸 絨毛娃娃內部（Edge / Hardware）]
+        Mic[🎙️ USB 麥克風]
+        Wake[🔍 喚醒詞引擎\nPorcupine / Snowboy]
+        RPi[🍓 Raspberry Pi 4B / Zero 2 W]
+        Speaker[🔊 迷你擴音喇叭]
+        LED[💡 呼吸式狀態燈]
+        Heater[🔥 低溫加熱墊]
+        Servo[🦾 伺服機 / 頭部動作]
     end
 
-    subgraph ☁️ 雲端 API 服務 (Cloud)
-        STT[👂 語音轉文字 (Whisper API)]:::cloud
-        LLM[🧠 語言模型 (GPT-4o / Claude)]:::cloud
-        TTS[🗣️ 文字轉語音 (OpenAI TTS)]:::cloud
+    subgraph Cloud[☁️ 雲端 AI 服務（Cloud）]
+        STT[👂 語音轉文字\nWhisper API]
+        LLM[🧠 同理心大腦\nGPT-4o / Claude]
+        TTS[🗣️ 文字轉語音\nOpenAI TTS]
     end
 
-    %% Data Flow
-    User -- "說話" --> Mic
-    Mic --> WakeWord
-    WakeWord -- "觸發成功" --> RPi
-    Mic -- "錄音檔 (.wav)" --> STT
-    STT -- "文字檔 (Text)" --> LLM
-    LLM -- "回應文字 (Text)" --> TTS
-    TTS -- "音訊檔 (.mp3)" --> RPi
+    User -->|說話| Mic
+    Mic --> Wake
+    Wake -->|喚醒成功| RPi
+
+    Mic -->|錄音檔| STT
+    STT -->|文字內容| LLM
+    LLM -->|回應文字| TTS
+    TTS -->|音訊檔| RPi
+
     RPi --> Speaker
-    Speaker -- "溫暖的回應" --> User
-    
-    %% Hardware Control
-    RPi -. "控制溫度" .-> Heater
-    RPi -. "閃爍狀態" .-> LED
+    Speaker -->|溫暖回應| User
+
+    RPi -. 控制溫度 .-> Heater
+    RPi -. 控制表情與燈光 .-> LED
+    RPi -. 控制點頭 / 揮手 .-> Servo
 ```
+
+這個架構讓喚醒與即時互動保留在邊緣端，讓杯麵具備快速反應與低延遲體驗；而語意理解與自然對話則透過雲端 AI 完成，形成「有溫度的硬體 + 有同理心的 AI」整合方案。
 
 ---
 
